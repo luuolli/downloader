@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
    <application
-        android:label="downloader"
+        android:label="Downloader"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -41,7 +41,7 @@
         <!-- Flutter downloader -->
         <provider
             android:name="vn.hunghd.flutterdownloader.DownloadedFileProvider"
-            android:authorities="${applicationId}.flutter_downloader.provider"
+            android:authorities="com.example.downloader.flutter_downloader.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -51,7 +51,7 @@
             <!-- declare customized Initializer -->
         <provider
             android:name="vn.hunghd.flutterdownloader.FlutterDownloaderInitializer"
-            android:authorities="${aplicationId}.flutter-downloader-init"
+            android:authorities="com.example.downloader.flutter-downloader-init"
             android:exported="false">
             <!-- changes this number to configure the maximum number of concurrent tasks -->
             <meta-data
