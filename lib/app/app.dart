@@ -9,8 +9,6 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    return const MaterialApp(
-      home: Home(),
-    );
+    return MaterialApp(home: Home(key: key));
   }
 }
