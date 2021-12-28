@@ -3,7 +3,7 @@ import '../enities/enities.dart';
 abstract class ITasksManager {
   List<TaskInfo>? get tasks;
 
-  void prepare(List<TaskInfo> tasks);
+  Future<void> prepare(List<TaskInfo> tasks, {required Function onLoaded});
 
-  List<TaskInfo> extraTasks();
+  Future<List<TaskInfo>> extraTasks();
 }

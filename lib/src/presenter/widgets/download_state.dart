@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:isolate';
 import 'dart:ui';
 
+import 'package:downloader/src/helpers/links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 
@@ -14,9 +15,15 @@ class DownloadState<T extends StatefulWidget> extends State<T> {
 
   final ReceivePort _port = ReceivePort();
 
+  int get tasksCount => _tasksManager.tasks?.length ?? 0;
+
   DownloadStep step = DownloadStep.none;
   late final IAssetsManager _assetsManager;
+
   late final ITasksManager _tasksManager;
+
+  ITasksManager get taskManager => _tasksManager;
+
   late final IDownloadManager _downloadManager;
 
   DownloadState({this.onComplete, this.onError});
@@ -35,7 +42,17 @@ class DownloadState<T extends StatefulWidget> extends State<T> {
     });
   }
 
-  void download() {}
+  Future<void> download() async {
+    final paths = [""];
+    _assetsManager.prepare(paths, "http://cdn.frei.re", onComplete: () async {
+      final tasks = _assetsManager.assetsMap
+          .map((item) => TaskInfo(link: item['link'], name: item['name']))
+          .toList();
+      await _tasksManager.prepare(tasks, onLoaded: () {
+        setState(() {});
+      });
+    });
+  }
 
   void _bindBackgroundIsolate() {
     bool isSuccess = IsolateNameServer.registerPortWithName(

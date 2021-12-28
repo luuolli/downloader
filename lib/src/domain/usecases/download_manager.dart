@@ -7,17 +7,9 @@ abstract class IDownloadManager {
 
   Future<void> delete(TaskInfo task);
 
-  Future<void> downloadOne(
-    TaskInfo taskInfo, {
-    Function? onComplete,
-    Function? onError,
-  });
+  Future<void> downloadOne(TaskInfo task);
 
-  Future<void> downloadMany(
-    TaskInfo taskInfo, {
-    Function? onComplete,
-    Function(List<TaskInfo> tasks)? onError,
-  });
+  Future<void> downloadMany(List<TaskInfo> tasks);
 
   Future<void> pause(TaskInfo task);
 
